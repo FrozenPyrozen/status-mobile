@@ -9,24 +9,25 @@
   "This component based on the following properties:
   - :item - item which got color, amount, currency, icon, network properties 
   "
-  [item]
+  [{:keys {[amount, network, currency, icon , connectedTo?, connectedFrom? ,id, color]}}]
   [rn/view
-   {:style               [style/item-container {:border-color item.color}]
+   {:style               [style/item-container {:border-color color}]
     :accessibility-label :network-connections-item-container}
    [rn/view
     {:style [style/item-row]}
     [rn/text
-     {:style [style/amount]} item.amount]
+     {:style [style/amount]} amount]
     [rn/text
-     {:style [style/currency]} item.currency]]]
+     {:style [style/currency]} currency]]]
   [rn/view
    {:style [style/item-row]}
    [rn/view
     {:style [style/icon-container]}
     [rn/view
-     {:style [style/icon]}]]
+     {:style [style/icon]}]  [rn/text
+    {:style [style/title]} icon]]
    [rn/text
-    {:style [style/title]} item.network]])
+    {:style [style/title]} network]])
 
 (defn network-connections
   "This component based on the following properties:
@@ -34,25 +35,29 @@
   - :to - vector of to connections
   "
   [{:keys [from to]}]
-  (log/debug "from" from "to" to)
   [rn/view
    {:style               style/container
     :accessibility-label :network-connections-container}
    [rn/view
     {:style               style/column
      :accessibility-label :network-connections-column-left}
+    [rn/text "From"]
     [rn/flat-list
      {:flex                         1
       :keyboard-should-persist-taps :always
       :data                         from
+      :listKey "From Column"
       :render-fn                    network-connections-item-render
-      :key-fn                       str}]]
+      :key-fn                       :id}]]
    [rn/view
     {:style               style/column
      :accessibility-label :network-connections-column-right}
+    [rn/text "To"]
+    
     [rn/flat-list
      {:flex                         1
       :keyboard-should-persist-taps :always
       :data                         to
+      :listKey "To Column"
       :render-fn                    network-connections-item-render
-      :key-fn                       str}]]])
+      :key-fn                       :id}]]])

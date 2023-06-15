@@ -4,7 +4,6 @@
             [quo2.foundations.colors :as colors]
             [react-native.core :as rn]
             [reagent.core :as reagent]
-            [taoensso.timbre :as log]
             [status-im2.contexts.quo-preview.preview :as preview]))
 
 (def descriptor
@@ -23,8 +22,6 @@
 
 (defn network-connection-preview
   [text component {:keys [from to]}]
-  (log/debug "from" from "to" to)
-
   [rn/view
    {:style {:margin      6
             :align-items :center}}
@@ -37,12 +34,12 @@
 (defn cool-preview
   []
   (let [state (reagent/atom
-               {:from [{:amount 50 :label "Mainnet" :currency :ETH :icon "Test" :connectedTo "" :id 0}
-                       {:amount 50 :label "Optimism" :currency :ETH :icon "Test" :connectedTo "" :id 1}
-                       {:amount 50 :label "Arbitrum" :currency :ETH :icon "Test" :connectedTo "" :id 2}]
+               {:from [{:amount 50 :network "Mainnet" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 0}
+                       {:amount 50 :network "Optimism" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 1}
+                       {:amount 50 :network "Arbitrum" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 2}]
                 :to
-                [{:amount 100 :label "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :id 3}
-                 {:amount 50 :label "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :id 4}]})]
+                [{:amount 100 :network "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :color "red" :id 3}
+                 {:amount 50 :network "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :color "red" :id 4}]})]
     (fn []
       [rn/view
        [preview/customizer state descriptor]
@@ -59,5 +56,6 @@
    [rn/flat-list
     {:style                        {:flex 1}
      :keyboard-should-persist-taps :always
+     :listKey "preview-network-connections"
      :header                       [cool-preview]
      :key-fn                       str}]])
