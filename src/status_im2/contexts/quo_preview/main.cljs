@@ -91,6 +91,7 @@
     [status-im2.contexts.quo-preview.tags.token-tag :as token-tag]
     [status-im2.contexts.quo-preview.title.title :as title]
     [status-im2.contexts.quo-preview.wallet.lowest-price :as lowest-price]
+    [status-im2.contexts.quo-preview.network-connections.network-connections :as network_connections]
     [status-im2.contexts.quo-preview.wallet.network-amount :as network-amount]
     [status-im2.contexts.quo-preview.wallet.network-breakdown :as network-breakdown]
     [status-im2.contexts.quo-preview.wallet.token-overview :as token-overview]
@@ -102,7 +103,10 @@
                             :component shadows/preview-shadows}]
    :animated-list         [{:name      :animated-header-list
                             :options   {:topBar {:visible false}}
-                            :component animated-header-list/mock-screen}]
+                            :component animated-header-list/mock-screen}
+                           {:name      :network-connections
+                            :options   {:topBar {:visible true}}
+                            :component network_connections/preview-network-connections}]
    :avatar                [{:name      :group-avatar
                             :options   {:topBar {:visible true}}
                             :component group-avatar/preview-group-avatar}
@@ -347,7 +351,8 @@
    :text-combinations     [{:name      :title
                             :options   {:topBar {:visible true}}
                             :component title/preview-title}]
-   :wallet                [{:name      :lowest-price
+   :wallet                [
+                           {:name      :lowest-price
                             :options   {:topBar {:visible true}}
                             :component lowest-price/preview-lowest-price}
                            {:name      :token-overview
