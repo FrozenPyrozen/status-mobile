@@ -33,13 +33,44 @@
 
 (defn cool-preview
   []
-  (let [state (reagent/atom
-               {:from [{:amount 50 :network "Mainnet" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 0}
-                       {:amount 50 :network "Optimism" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 1}
-                       {:amount 50 :network "Arbitrum" :currency :ETH :icon "Test" :connectedTo "" :color "red" :id 2}]
-                :to
-                [{:amount 100 :network "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :color "red" :id 3}
-                 {:amount 50 :network "Optimism" :currency :ETH :icon "Test" :connectedFrom "" :color "red" :id 4}]})]
+  (let [state
+        (reagent/atom
+         {:from [{:amount      "50"
+                  :type        "Mainnet"
+                  :currency    "ETH"
+                  :icon        (js/require "../resources/images/icons/ethereum.png")
+                  :connectedTo ""
+                  :color       "#758EEB"
+                  :id          0}
+                 {:amount      "50"
+                  :type        "Optimism"
+                  :currency    "ETH"
+                  :icon        "Test"
+                  :connectedTo ""
+                  :color       "#E76E6E"
+                  :id          1}
+                 {:amount      "50"
+                  :type        "Arbitrum"
+                  :currency    "ETH"
+                  :icon        "Test"
+                  :connectedTo ""
+                  :color       "#6BD5F0"
+                  :id          2}]
+          :to
+          [{:amount        "50"
+            :type          "Mainnet"
+            :currency      "ETH"
+            :icon          (js/require "../resources/images/icons/ethereum.png")
+            :connectedFrom ""
+            :color         "#758EEB"
+            :id            3}
+           {:amount        "50"
+            :type          "Optimism"
+            :currency      "ETH"
+            :icon          "Test"
+            :connectedFrom ""
+            :color         "#6BD5F0"
+            :id            4}]})]
     (fn []
       [rn/view
        [preview/customizer state descriptor]
@@ -56,6 +87,6 @@
    [rn/flat-list
     {:style                        {:flex 1}
      :keyboard-should-persist-taps :always
-     :listKey "preview-network-connections"
+     :listKey                      "preview-network-connections"
      :header                       [cool-preview]
      :key-fn                       str}]])

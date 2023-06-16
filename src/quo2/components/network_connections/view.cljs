@@ -2,16 +2,17 @@
   (:require
     [react-native.core :as rn]
     [quo2.components.network-connections.style :as style]
+    [status-im.ui.components.fast-image :as fast-image]
     [taoensso.timbre :as log]
   ))
 
 (defn network-connections-item-render
   "This component based on the following properties:
-  - :item - item which got color, amount, currency, icon, network properties 
+  - :item - item which got color, amount, currency, icon, type properties 
   "
-  [{:keys {[amount, network, currency, icon , connectedTo?, connectedFrom? ,id, color]}}]
+  [{:keys [amount type currency icon connectedTo? connectedFrom? id color]}]
   [rn/view
-   {:style               [style/item-container {:border-color color}]
+   {:style               [(style/item-container {:border-color color})]
     :accessibility-label :network-connections-item-container}
    [rn/view
     {:style [style/item-row]}
@@ -23,11 +24,13 @@
    {:style [style/item-row]}
    [rn/view
     {:style [style/icon-container]}
-    [rn/view
-     {:style [style/icon]}]  [rn/text
-    {:style [style/title]} icon]]
+    [fast-image/fast-image
+     {:style       style/icon
+      :resize-mode :contain
+      :source      icon}]
+   ]
    [rn/text
-    {:style [style/title]} network]])
+    {:style [style/title]} type]])
 
 (defn network-connections
   "This component based on the following properties:
@@ -46,18 +49,18 @@
      {:flex                         1
       :keyboard-should-persist-taps :always
       :data                         from
-      :listKey "From Column"
+      :listKey                      "From Column"
       :render-fn                    network-connections-item-render
       :key-fn                       :id}]]
    [rn/view
     {:style               style/column
      :accessibility-label :network-connections-column-right}
     [rn/text "To"]
-    
+
     [rn/flat-list
      {:flex                         1
       :keyboard-should-persist-taps :always
       :data                         to
-      :listKey "To Column"
+      :listKey                      "To Column"
       :render-fn                    network-connections-item-render
       :key-fn                       :id}]]])
