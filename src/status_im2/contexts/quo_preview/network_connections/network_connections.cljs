@@ -45,14 +45,14 @@
                  {:amount      "50"
                   :type        "Optimism"
                   :currency    "ETH"
-                  :icon        "Test"
+                  :icon        (js/require "../resources/images/icons/optimism.png")
                   :connectedTo ""
                   :color       "#E76E6E"
                   :id          1}
                  {:amount      "50"
                   :type        "Arbitrum"
                   :currency    "ETH"
-                  :icon        "Test"
+                  :icon        (js/require "../resources/images/icons/arbitrum.png")
                   :connectedTo ""
                   :color       "#6BD5F0"
                   :id          2}]
@@ -67,7 +67,7 @@
            {:amount        "50"
             :type          "Optimism"
             :currency      "ETH"
-            :icon          "Test"
+            :icon          (js/require "../resources/images/icons/optimism.png")
             :connectedFrom ""
             :color         "#6BD5F0"
             :id            4}]})]
