@@ -4,48 +4,54 @@
 
 
 (def container
-  {:flex               1
-   :flex-direction     :row
-   :align-items        :center
-   :justify-content    :space-between
-   :padding-horizontal 10
-   :margin-bottom      20})
+  {:flex            1
+   :flex-direction  :row
+   :justify-content :space-between
+  })
+
+(def column-title
+  {})
 
 (def column
-  {:flex        1
-   :align-items :flex-start})
+  {:flex            1
+   :flex-direction  :column
+   :justify-content :space-between
+  })
+
+(def scroll-container
+  {:flex-shrink 0
+   :flex-grow   1})
 
 
 (defn item-container
   [border-color window-width]
-  {:width           (/ window-width 3)
-   :height          44
-   :flex            1
-   :flex-direction  :column
-   :align-items     :flex-start
-   :justify-content :center
-   :margin-bottom   12
-   :border-color    border-color
-   :border-width    1
-   :border-radius   12})
+  {:flex               1
+   :height             44
+   :flex-direction     :column
+   :align-items        :flex-start
+   :justify-content    :center
+   :margin-bottom      12
+   :border-color       border-color
+   :border-width       1
+   :border-radius      12
+   :padding-horizontal 5
+   :padding-vertical   8
+   :overflow           :hidden})
 
 (def item-row
-  {:flex             1
-   :flex-direction  :row
-   :align-items      :center})
+  {:flex-direction :row
+   :align-items    :center
+  })
 
 (def amount
-  {:margin-right 4})
+  {})
 
 (def currency
-  {:margin-right 4})
+  {:margin-left 5})
 
 (def icon-container
-  {:width            20
-   :height           20
-   :margin-right     4
-   :align-items     :flex-start
-   :justify-content  :center
+  {:align-items     :flex-start
+   :justify-content :center
   })
 
 (def icon
@@ -53,4 +59,4 @@
    :height 12})
 
 (def title
-  {})
+  {:margin-left 5})
